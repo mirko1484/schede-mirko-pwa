@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="it" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Mirko Workout • Upper Body & Core</title>
+  <meta name="theme-color" content="#080c14">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icon-192.png">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+          colors: { slate: { 850: '#161e2e', 925: '#0c121e', 950: '#080c14' } }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: #080c14;
+      color: #f1f5f9;
+      font-family: 'Inter', system-ui, sans-serif;
+      overscroll-behavior-y: contain;
+    }
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
+    input[type="number"] { -moz-appearance: textfield; }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col pb-32 select-none">
+  <header class="sticky top-0 z-30 bg-slate-950/95 backdrop-blur-md border-b border-slate-800/80">
+    <div class="max-w-2xl mx-auto px-4 pt-3 pb-2.5">
+      <div class="flex items-center justify-between gap-2">
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="inline-flex items-center justify-center w-7 h-7 rounded-lg bg-amber-500 text-slate-950 font-extrabold text-sm shadow-sm shadow-amber-500/20">M</span>
+            <h1 class="text-base sm:text-lg font-extrabold tracking-tight text-white">Schede Mirko</h1>
+            <span class="text-[11px] font-semibold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-400 border border-amber-500/30">Upper + Core</span>
+          </div>
+          <p class="text-xs text-slate-400 mt-0.5">190 cm × 115 kg • <span class="text-emerald-400 font-medium">Tendine d'Achille Protetto</span></p>
+        </div>
+        <div class="flex items-center gap-1.5">
+          <button id="btn-install-pwa" type="button" class="hidden items-center gap-1 px-2.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-400 active:scale-95 text-slate-950 text-xs font-extrabold transition shadow-sm shadow-emerald-500/20">
+            <svg class="w-4 h-4 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5m0 0l5-5m-5 5V3" />
+            </svg>
+            <span>Installa</span>
+          </button>
+          <button id="btn-open-advice" type="button" class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-95 text-amber-300 border border-amber-500/30 text-xs font-bold transition">
+            <svg class="w-4 h-4 text-amber-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span>Guida Tendine</span>
+          </button>
+        </div>
+      </div>
+      <nav class="grid grid-cols-3 gap-1.5 mt-3 bg-slate-900 p-1 rounded-xl border border-slate-800" aria-label="Giornate di allenamento">
+        <button type="button" data-day="1" class="day-tab py-2 px-2 rounded-lg text-xs sm:text-sm font-bold transition text-center leading-tight"><span class="block text-[10px] uppercase tracking-wider opacity-75">Giorno 1</span><span>Spinta</span></button>
+        <button type="button" data-day="2" class="day-tab py-2 px-2 rounded-lg text-xs sm:text-sm font-bold transition text-center leading-tight"><span class="block text-[10px] uppercase tracking-wider opacity-75">Giorno 2</span><span>Tirata</span></button>
+        <button type="button" data-day="3" class="day-tab py-2 px-2 rounded-lg text-xs sm:text-sm font-bold transition text-center leading-tight"><span class="block text-[10px] uppercase tracking-wider opacity-75">Giorno 3</span><span>Richiamo</span></button>
+      </nav>
+      <div class="mt-3 flex items-center justify-between gap-3">
+        <div class="flex-1">
+          <div class="flex justify-between items-center text-xs mb-1">
+            <span id="day-subtitle" class="font-semibold text-slate-300 truncate">Petto, Spalle, Tricipiti + Core</span>
+            <span id="progress-label" class="font-bold text-emerald-400 tabular-nums ml-2">0%</span>
+          </div>
+          <div class="w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div id="progress-bar" class="h-full bg-gradient-to-r from-amber-500 to-emerald-500 transition-all duration-300 rounded-full" style="width: 0%"></div>
+          </div>
+        </div>
+        <button id="btn-reset-sets" type="button" title="Azzera spunte serie di oggi" class="shrink-0 px-2.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 active:scale-95 border border-slate-700/80 text-slate-300 text-xs font-semibold flex items-center gap-1 transition">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>Azzera Serie</span>
+        </button>
+      </div>
+    </div>
+  </header>
+  <main id="workout-container" class="max-w-2xl w-full mx-auto px-4 pt-4 space-y-6 flex-1"></main>
+  <div id="timer-dock" class="fixed bottom-0 inset-x-0 z-40 bg-slate-900/95 backdrop-blur-lg border-t border-slate-800 shadow-2xl transition-transform duration-300">
+    <div class="max-w-2xl mx-auto px-4 py-2.5">
+      <div class="w-full h-1 bg-slate-800 rounded-full overflow-hidden mb-2">
+        <div id="timer-progress" class="h-full bg-amber-400 transition-all duration-200" style="width: 0%"></div>
+      </div>
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center gap-3 min-w-0">
+          <div id="timer-display" class="text-2xl sm:text-3xl font-extrabold tabular-nums tracking-tight text-white">01:30</div>
+          <div class="min-w-0">
+            <div id="timer-status" class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Timer Recupero</div>
+            <div id="timer-exercise-name" class="text-xs text-slate-400 truncate">Tocca "Rec" su un esercizio</div>
+          </div>
+        </div>
+        <div class="flex items-center gap-1.5 shrink-0">
+          <button type="button" id="btn-timer-minus" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 font-bold text-xs border border-slate-700 transition">-15s</button>
+          <button type="button" id="btn-timer-plus" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-200 font-bold text-xs border border-slate-700 transition">+15s</button>
+          <button type="button" id="btn-timer-toggle" class="px-3.5 h-9 rounded-xl bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-extrabold text-xs uppercase tracking-wide shadow-md shadow-amber-500/20 transition">Avvia</button>
+          <button type="button" id="btn-timer-reset" aria-label="Reset timer" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 active:scale-95 text-slate-400 hover:text-white flex items-center justify-center border border-slate-700 transition">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="advice-modal" class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-black/75 backdrop-blur-sm p-0 sm:p-4">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-lg rounded-t-3xl sm:rounded-2xl max-h-[88vh] flex flex-col shadow-2xl overflow-hidden">
+      <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-950/60">
+        <div class="flex items-center gap-2.5">
+          <div class="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-400">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+          </div>
+          <div>
+            <h2 class="text-base font-extrabold text-white">Sicurezza Tendine d'Achille</h2>
+            <p class="text-xs text-slate-400">Linee guida pratiche per Mirko</p>
+          </div>
+        </div>
+        <button id="btn-close-advice" type="button" class="w-9 h-9 rounded-xl bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center">
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <div class="p-5 overflow-y-auto space-y-4 text-sm text-slate-300 leading-relaxed">
+        <div class="p-3.5 rounded-xl bg-rose-500/10 border border-rose-500/30">
+          <h3 class="font-bold text-rose-300 text-xs uppercase tracking-wider mb-1">Assolutamente da evitare</h3>
+          <p class="text-xs sm:text-sm text-slate-200">Niente corsa, camminata in salita, salti, corda, burpees, spinte sulle punte dei piedi, leg press o esercizi in piedi con carichi pesanti che scaricano sulla caviglia.</p>
+        </div>
+        <div class="p-3.5 rounded-xl bg-emerald-500/10 border border-emerald-500/30">
+          <h3 class="font-bold text-emerald-300 text-xs uppercase tracking-wider mb-1">Cardio e Riscaldamento Sicuro</h3>
+          <p class="text-xs sm:text-sm text-slate-200">Usa esclusivamente l'ergometro a braccia (<strong>TOP</strong>) oppure la <strong>Recline Bike</strong> (con schienale), spingendo sul pedale con il <strong>tallone o il mesopiede</strong> senza mai spingere con l'avampiede.</p>
+        </div>
+        <div class="space-y-2.5">
+          <h3 class="font-bold text-amber-400 text-xs uppercase tracking-wider">Accorgimenti Posturali in Sala Pesi</h3>
+          <ul class="space-y-2 text-xs sm:text-sm">
+            <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span><span><strong>Panca Piana:</strong> Se tenere i piedi a terra mette in tensione il polpaccio, appoggia i piedi sopra la panca (ginocchia piegate) o usa i poggiapiedi rialzati della Chest Press.</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span><span><strong>Pulley Basso:</strong> Appoggia sulla pedana solo i talloni mantenendo le caviglie morbide e rilassate.</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span><span><strong>Esercizi in piedi (Push Down):</strong> Ginocchia leggermente sbloccate e peso ben centrato sui talloni, evitando di sbilanciarsi sulle punte.</span></li>
+            <li class="flex gap-2"><span class="text-amber-400 font-bold">•</span><span><strong>Plank ed Esercizi Core:</strong> Esegui il Plank sempre in appoggio sulle <strong>ginocchia</strong> (piedi sollevati o rilassati), mai puntando le dita dei piedi a terra.</span></li>
+          </ul>
+        </div>
+        <div class="p-3.5 rounded-xl bg-slate-800/80 border border-slate-700">
+          <h3 class="font-bold text-white text-xs uppercase tracking-wider mb-1">Gestione Carichi (190 cm × 115 kg)</h3>
+          <p class="text-xs text-slate-300">Parti sempre dal valore più basso del range indicato nella prima serie. Se completi le ripetizioni con tecnica pulita lasciando <strong>1–2 ripetizioni di margine ("buffer")</strong>, aumenta gradualmente nella serie successiva.</p>
+        </div>
+      </div>
+      <div class="p-4 border-t border-slate-800 bg-slate-950/60">
+        <button id="btn-confirm-advice" type="button" class="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-sm transition">Ho capito, torna all'allenamento</button>
+      </div>
+    </div>
+  </div>
+  <div id="reset-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+    <div class="bg-slate-900 border border-slate-700 w-full max-w-sm rounded-2xl p-5 shadow-2xl space-y-4">
+      <h3 class="text-base font-extrabold text-white">Azzerare le serie di questa giornata?</h3>
+      <p class="text-xs sm:text-sm text-slate-300">Tutte le caselle delle serie completate verranno deselezionate per iniziare una nuova seduta. <strong>I carichi in Kg salvati resteranno memorizzati.</strong></p>
+      <div class="flex gap-2.5 pt-1">
+        <button id="btn-cancel-reset" type="button" class="flex-1 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold text-xs transition">Annulla</button>
+        <button id="btn-confirm-reset" type="button" class="flex-1 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-extrabold text-xs transition">Azzera Serie</button>
+      </div>
+    </div>
+  </div>
+  <div id="toast" class="fixed top-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 transition-opacity duration-200">
+    <div id="toast-text" class="px-4 py-2 rounded-full bg-emerald-500 text-slate-950 font-extrabold text-xs shadow-lg">Salvato</div>
+  </div>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js').catch((err) => console.warn('SW error:', err));
+      });
+    }
+    let deferredPrompt = null;
+    const installBtn = document.getElementById('btn-install-pwa');
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.classList.remove('hidden');
+      installBtn.classList.add('flex');
+    });
+    installBtn.addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        installBtn.classList.add('hidden');
+        installBtn.classList.remove('flex');
+      }
+      deferredPrompt = null;
+    });
+
+    const SVG_ICONS = {"top_ergo": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><rect x=\"8\" y=\"42\" width=\"48\" height=\"4\" rx=\"2\" fill=\"#334155\"/><path d=\"M16 42L22 26H32V42\" stroke=\"#94a3b8\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"14\" r=\"4.5\" fill=\"#f8fafc\"/><path d=\"M24 19L23 28H34L36 40\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M25 21L38 19\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><circle cx=\"43\" cy=\"19\" r=\"7.5\" stroke=\"#fbbf24\" stroke-width=\"2.5\"/><line x1=\"43\" y1=\"19\" x2=\"43\" y2=\"42\" stroke=\"#94a3b8\" stroke-width=\"3\" stroke-linecap=\"round\"/></svg>", "mobility": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><circle cx=\"32\" cy=\"12\" r=\"4.5\" fill=\"#f8fafc\"/><line x1=\"32\" y1=\"17\" x2=\"32\" y2=\"38\" stroke=\"#f8fafc\" stroke-width=\"3\" stroke-linecap=\"round\"/><path d=\"M14 23H50\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><path d=\"M16 16C12 20 12 26 16 30\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M48 16C52 20 52 26 48 30\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M24 38H40\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/></svg>", "recline_bike": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M10 42H54M18 42V22\" stroke=\"#64748b\" stroke-width=\"2.8\" stroke-linecap=\"round\"/><circle cx=\"23\" cy=\"17\" r=\"4.5\" fill=\"#f8fafc\"/><path d=\"M23 22V34H36L41 29\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"44\" cy=\"31\" r=\"7\" stroke=\"#fbbf24\" stroke-width=\"2.5\"/><line x1=\"44\" y1=\"31\" x2=\"40\" y2=\"27\" stroke=\"#fbbf24\" stroke-width=\"2.2\" stroke-linecap=\"round\"/></svg>", "bench_press": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"8\" y1=\"38\" x2=\"50\" y2=\"38\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"15\" y1=\"38\" x2=\"15\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\"/><line x1=\"42\" y1=\"38\" x2=\"42\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\"/><circle cx=\"16\" cy=\"32\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M21 34H39L47 34L49 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"27\" y1=\"34\" x2=\"27\" y2=\"15\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"27\" cy=\"14\" r=\"4\" fill=\"#fbbf24\"/><path d=\"M22 10V6M32 10V6\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>", "incline_db": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M14 46L23 36H40L47 46\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><line x1=\"16\" y1=\"36\" x2=\"27\" y2=\"18\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"31\" cy=\"16\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M27 20L22 32H37L42 44\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"26\" y1=\"24\" x2=\"35\" y2=\"10\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><rect x=\"31\" y=\"7\" width=\"8\" height=\"4\" rx=\"1\" fill=\"#fbbf24\"/></svg>", "pec_deck": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><rect x=\"27\" y=\"10\" width=\"10\" height=\"26\" rx=\"2\" stroke=\"#64748b\" stroke-width=\"2.2\"/><line x1=\"23\" y1=\"36\" x2=\"41\" y2=\"36\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"14\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M27 21H16V30M37 21H48V30\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M19 32Q32 38 45 32\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>", "shoulder_press": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M18 46V16M18 36H36V46\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"17\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M25 22V33H36L39 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M25 24L33 20V9\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"29\" y=\"6\" width=\"8\" height=\"3.5\" rx=\"1\" fill=\"#fbbf24\"/></svg>", "lateral_raise": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"22\" y1=\"36\" x2=\"42\" y2=\"36\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"32\" y1=\"36\" x2=\"32\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\"/><circle cx=\"32\" cy=\"14\" r=\"4\" fill=\"#f8fafc\"/><line x1=\"32\" y1=\"19\" x2=\"32\" y2=\"34\" stroke=\"#f8fafc\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"12\" y1=\"21\" x2=\"52\" y2=\"21\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><rect x=\"8\" y=\"18.5\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fbbf24\"/><rect x=\"51\" y=\"18.5\" width=\"5\" height=\"5\" rx=\"1\" fill=\"#fbbf24\"/></svg>", "pushdown": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M13 46V8H30\" stroke=\"#64748b\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"28\" y1=\"8\" x2=\"28\" y2=\"26\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-dasharray=\"3 2\"/><circle cx=\"39\" cy=\"14\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M39 19V32L37 46M39 32L42 46\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><path d=\"M39 21L35 28H28\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/></svg>", "crunch": "<svg viewBox=\"0 0 64 46\" class=\"w-14 h-11\" fill=\"none\"><line x1=\"8\" y1=\"38\" x2=\"56\" y2=\"38\" stroke=\"#475569\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"16\" cy=\"23\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M19 26Q25 36 34 36L43 23L50 37\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M16 16Q21 11 26 16\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>", "dead_bug": "<svg viewBox=\"0 0 64 46\" class=\"w-14 h-11\" fill=\"none\"><line x1=\"8\" y1=\"38\" x2=\"56\" y2=\"38\" stroke=\"#475569\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"14\" cy=\"33\" r=\"4\" fill=\"#f8fafc\"/><line x1=\"19\" y1=\"35\" x2=\"39\" y2=\"35\" stroke=\"#f8fafc\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"23\" y1=\"35\" x2=\"23\" y2=\"16\" stroke=\"#f8fafc\" stroke-width=\"2.4\" stroke-linecap=\"round\"/><path d=\"M39 35V22H50\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"39\" y1=\"35\" x2=\"52\" y2=\"31\" stroke=\"#fbbf24\" stroke-width=\"2.4\" stroke-linecap=\"round\"/></svg>", "lat_pulldown": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M41 46V8H23\" stroke=\"#64748b\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"16\" y1=\"15\" x2=\"34\" y2=\"15\" stroke=\"#fbbf24\" stroke-width=\"2.8\" stroke-linecap=\"round\"/><line x1=\"18\" y1=\"36\" x2=\"34\" y2=\"36\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"21\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M25 26V35H34L35 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M25 27L19 16M25 27L31 16\" stroke=\"#f8fafc\" stroke-width=\"2.3\" stroke-linecap=\"round\"/></svg>", "seated_row": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"10\" y1=\"40\" x2=\"36\" y2=\"40\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"48\" y1=\"22\" x2=\"48\" y2=\"44\" stroke=\"#64748b\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><circle cx=\"21\" cy=\"18\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M21 23V37H35L45 34\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"21\" y1=\"27\" x2=\"36\" y2=\"29\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"36\" y1=\"29\" x2=\"48\" y2=\"29\" stroke=\"#fbbf24\" stroke-width=\"2.2\"/></svg>", "low_row": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"16\" y1=\"36\" x2=\"32\" y2=\"36\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"34\" y1=\"18\" x2=\"34\" y2=\"34\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"16\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M25 21V34H34L35 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"25\" y1=\"24\" x2=\"41\" y2=\"24\" stroke=\"#fbbf24\" stroke-width=\"2.8\" stroke-linecap=\"round\"/></svg>", "rear_delt": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><rect x=\"27\" y=\"10\" width=\"10\" height=\"26\" rx=\"2\" stroke=\"#64748b\" stroke-width=\"2.2\"/><circle cx=\"32\" cy=\"14\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M27 21L12 25M37 21L52 25\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><path d=\"M16 18Q10 24 14 30M48 18Q54 24 50 30\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>", "incline_curl": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M14 46L23 36H40L47 46\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><line x1=\"16\" y1=\"36\" x2=\"26\" y2=\"18\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"30\" cy=\"16\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M26 20L22 32H37L42 44\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M25 22L23 32L31 28\" stroke=\"#f8fafc\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"32\" cy=\"27\" r=\"2.6\" fill=\"#fbbf24\"/></svg>", "conc_curl": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"20\" y1=\"36\" x2=\"38\" y2=\"36\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"27\" y1=\"36\" x2=\"27\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\"/><circle cx=\"29\" cy=\"15\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M28 20L25 34H38L40 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M28 22L35 32L40 26\" stroke=\"#f8fafc\" stroke-width=\"2.4\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"41\" cy=\"25\" r=\"2.6\" fill=\"#fbbf24\"/></svg>", "reverse_crunch": "<svg viewBox=\"0 0 64 46\" class=\"w-14 h-11\" fill=\"none\"><line x1=\"8\" y1=\"38\" x2=\"56\" y2=\"38\" stroke=\"#475569\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"14\" cy=\"33\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M19 35H34Q39 29 34 22H25\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M38 29L33 20\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>", "knee_plank": "<svg viewBox=\"0 0 64 46\" class=\"w-14 h-11\" fill=\"none\"><line x1=\"8\" y1=\"38\" x2=\"56\" y2=\"38\" stroke=\"#475569\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"15\" cy=\"22\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M19 25L40 36L49 28\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M19 26L16 36H25\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"40\" cy=\"36\" r=\"3\" fill=\"#fbbf24\"/></svg>", "chest_press": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M18 46V16M18 36H34V46\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"17\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M25 22V33H34L36 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"25\" y1=\"25\" x2=\"43\" y2=\"25\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"43\" y1=\"20\" x2=\"43\" y2=\"30\" stroke=\"#fbbf24\" stroke-width=\"2.8\" stroke-linecap=\"round\"/></svg>", "supine_lat": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M41 46V8H23\" stroke=\"#64748b\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"19\" y1=\"15\" x2=\"31\" y2=\"15\" stroke=\"#fbbf24\" stroke-width=\"2.8\" stroke-linecap=\"round\"/><line x1=\"18\" y1=\"36\" x2=\"34\" y2=\"36\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"21\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M25 26V35H34L35 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M25 27L22 16M25 27L28 16\" stroke=\"#f8fafc\" stroke-width=\"2.3\" stroke-linecap=\"round\"/></svg>", "cable_fly": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"10\" y1=\"8\" x2=\"10\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><line x1=\"54\" y1=\"8\" x2=\"54\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"32\" cy=\"18\" r=\"4\" fill=\"#f8fafc\"/><line x1=\"32\" y1=\"23\" x2=\"32\" y2=\"37\" stroke=\"#f8fafc\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"10\" y1=\"10\" x2=\"23\" y2=\"25\" stroke=\"#fbbf24\" stroke-width=\"1.8\" stroke-dasharray=\"3 2\"/><line x1=\"54\" y1=\"10\" x2=\"41\" y2=\"25\" stroke=\"#fbbf24\" stroke-width=\"1.8\" stroke-dasharray=\"3 2\"/><path d=\"M32 24L23 25M32 24L41 25\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/></svg>", "front_raise": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><path d=\"M18 46V16M18 36H34V46\" stroke=\"#64748b\" stroke-width=\"2.5\" stroke-linecap=\"round\"/><circle cx=\"25\" cy=\"17\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M25 22V33H34L36 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"25\" y1=\"24\" x2=\"43\" y2=\"21\" stroke=\"#f8fafc\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><circle cx=\"45\" cy=\"21\" r=\"2.8\" fill=\"#fbbf24\"/></svg>", "french_press": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"10\" y1=\"38\" x2=\"50\" y2=\"38\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"16\" y1=\"38\" x2=\"16\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\"/><line x1=\"42\" y1=\"38\" x2=\"42\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\"/><circle cx=\"17\" cy=\"32\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M22 34H39L47 34L49 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M25 34V20L16 24\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><circle cx=\"15\" cy=\"25\" r=\"2.6\" fill=\"#fbbf24\"/></svg>", "hammer_curl": "<svg viewBox=\"0 0 64 52\" class=\"w-14 h-12\" fill=\"none\"><line x1=\"20\" y1=\"36\" x2=\"38\" y2=\"36\" stroke=\"#64748b\" stroke-width=\"3\" stroke-linecap=\"round\"/><line x1=\"27\" y1=\"36\" x2=\"27\" y2=\"46\" stroke=\"#64748b\" stroke-width=\"2.5\"/><circle cx=\"27\" cy=\"15\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M27 20V34H38L40 45\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M27 22V30L37 26\" stroke=\"#f8fafc\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><rect x=\"36\" y=\"22\" width=\"3.5\" height=\"7\" rx=\"1\" fill=\"#fbbf24\"/></svg>", "russian_twist": "<svg viewBox=\"0 0 64 46\" class=\"w-14 h-11\" fill=\"none\"><line x1=\"8\" y1=\"38\" x2=\"56\" y2=\"38\" stroke=\"#475569\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"23\" cy=\"16\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M24 21L30 36L41 26L48 37\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><line x1=\"25\" y1=\"24\" x2=\"36\" y2=\"26\" stroke=\"#fbbf24\" stroke-width=\"2.8\" stroke-linecap=\"round\"/></svg>", "superman": "<svg viewBox=\"0 0 64 46\" class=\"w-14 h-11\" fill=\"none\"><line x1=\"8\" y1=\"38\" x2=\"56\" y2=\"38\" stroke=\"#475569\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"18\" cy=\"26\" r=\"4\" fill=\"#f8fafc\"/><path d=\"M11 23L22 30L36 36H52\" stroke=\"#f8fafc\" stroke-width=\"2.8\" stroke-linecap=\"round\" stroke-linejoin=\"round\"/><path d=\"M14 18V12\" stroke=\"#fbbf24\" stroke-width=\"2\" stroke-linecap=\"round\"/></svg>"};
+    const WORKOUT_DATA = {"1": {"title": "Giorno 1: Spinta", "subtitle": "Petto, Spalle, Tricipiti + Core • ~60 min", "sections": [{"id": "warmup", "title": "1. Riscaldamento", "duration": "10 min", "badgeColor": "amber", "exercises": [{"id": "d1_w1", "name": "TOP (Ergometro a braccia) o Recline Bike", "alt": "8 min a ritmo blando/moderato", "icon": "top_ergo", "setsCount": 1, "setsLabel": "8 min", "restSec": 0, "rangeLabel": "Cardio scarico", "defaultKg": "", "isBodyweight": true, "desc": "Pedala con le braccia sul TOP oppure usa la Recline Bike con schienale.", "tendonNote": "Sulla bike spingi esclusivamente con tallone o mesopiede, mai con la punta."}, {"id": "d1_w2", "name": "Mobilità Spalle e Polsi", "alt": "2 min circonduzioni braccia e aperture petto", "icon": "mobility", "setsCount": 1, "setsLabel": "2 min", "restSec": 0, "rangeLabel": "Mobilità articolare", "defaultKg": "", "isBodyweight": true, "desc": "Circonduzioni lente delle braccia avanti/indietro e aperture controllate del torace da seduto.", "tendonNote": "Eseguibile comodamente da seduto per mantenere i piedi rilassati."}]}, {"id": "main", "title": "2. Parte Centrale – Forza e Ipertrofia", "duration": "40 min", "badgeColor": "sky", "exercises": [{"id": "d1_m1", "name": "Panca Piana con Bilanciere", "alt": "oppure Chest Press", "icon": "bench_press", "setsCount": 4, "setsLabel": "4 × 8", "restSec": 90, "rangeLabel": "45–60 kg totali", "defaultKg": "50", "desc": "Sdraiato su panca, impugna poco più largo delle spalle, scendi al centro del petto e spingi verso l'alto.", "tendonNote": "Appoggia i piedi ben piatti a terra o sui rialzi della panca per scaricare completamente i tendini."}, {"id": "d1_m2", "name": "Distensioni Manubri su Panca Inclinata (30°)", "alt": "Manubri (peso singolo)", "icon": "incline_db", "setsCount": 3, "setsLabel": "3 × 10", "restSec": 90, "rangeLabel": "14–18 kg a manubrio", "defaultKg": "14", "desc": "Seduto su panca inclinata a 30°, schiena aderente allo schienale. Spingi i manubri sopra la parte alta del petto.", "tendonNote": "Posizione seduta stabile: zero carico sulle caviglie."}, {"id": "d1_m3", "name": "Pectoral Machine", "alt": "oppure Croci ai Cavi da seduto", "icon": "pec_deck", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 60, "rangeLabel": "35–45 kg (cavi: 10–15 kg/lato)", "defaultKg": "35", "desc": "Seduto con schiena poggiata e gomiti leggermente flessi all'altezza delle spalle. Chiudi le braccia davanti al petto.", "tendonNote": "Schiena e bacino completamente supportati dal sedile."}, {"id": "d1_m4", "name": "Shoulder Press Machine", "alt": "oppure Lento Avanti Manubri seduto", "icon": "shoulder_press", "setsCount": 4, "setsLabel": "4 × 8", "restSec": 90, "rangeLabel": "30–45 kg (manubri: 12–16 kg)", "defaultKg": "35", "desc": "Seduto con schienale verticale, impugna all'altezza delle orecchie e spingi verso l'alto senza inarcare la schiena.", "tendonNote": "Mantieni i talloni ben appoggiati a terra senza spingere sulle punte."}, {"id": "d1_m5", "name": "Alzate Laterali con Manubri da seduto", "alt": "Manubri (peso singolo)", "icon": "lateral_raise", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 60, "rangeLabel": "6–10 kg a manubrio", "defaultKg": "8", "desc": "Seduto sul bordo della panca, busto fermo. Solleva i manubri lateralmente fino all'altezza delle spalle.", "tendonNote": "Esecuzione da seduto per evitare oscillazioni e tensioni sulle caviglie."}, {"id": "d1_m6", "name": "Push Down al Cavo con Corda", "alt": "Tricipiti ai cavi", "icon": "pushdown", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 60, "rangeLabel": "20–30 kg", "defaultKg": "25", "desc": "Gomiti bloccati ai fianchi, spingi la corda verso il basso aprendo leggermente le estremità a fine corsa.", "tendonNote": "In piedi con ginocchia morbide e peso ben scaricato sui talloni."}]}, {"id": "core", "title": "3. Core a Terra", "duration": "10 min", "badgeColor": "emerald", "exercises": [{"id": "d1_c1", "name": "Crunch a Terra", "alt": "Addome supino", "icon": "crunch", "setsCount": 3, "setsLabel": "3 × 15", "restSec": 30, "rangeLabel": "Corpo libero (0 kg)", "defaultKg": "0", "desc": "Supino, ginocchia piegate e piante dei piedi a terra. Solleva solo le spalle guardando in alto senza tirare il collo.", "tendonNote": "Piante dei piedi rilassate a terra, zero tensione sul tendine."}, {"id": "d1_c2", "name": "Dead Bug", "alt": "Controllo lombare alternato", "icon": "dead_bug", "setsCount": 3, "setsLabel": "3 × 10/lato", "restSec": 45, "rangeLabel": "Corpo libero (0 kg)", "defaultKg": "0", "desc": "Supino, braccia tese in alto e gambe a 90°. Distendi lentamente braccio destro e gamba sinistra senza inarcare i lombari.", "tendonNote": "Piedi sollevati in scarico completo per tutta la durata della serie."}]}]}, "2": {"title": "Giorno 2: Tirata", "subtitle": "Dorsali, Spalle Posteriori, Bicipiti + Core • ~60 min", "sections": [{"id": "warmup", "title": "1. Riscaldamento", "duration": "10 min", "badgeColor": "amber", "exercises": [{"id": "d2_w1", "name": "TOP (Ergometro a braccia)", "alt": "8 min (2' avanti / 2' indietro)", "icon": "top_ergo", "setsCount": 1, "setsLabel": "8 min", "restSec": 0, "rangeLabel": "Cardio braccia", "defaultKg": "", "isBodyweight": true, "desc": "Alterna 2 minuti di rotazione in avanti e 2 minuti all'indietro per scaldare spalle, scapole e dorsali.", "tendonNote": "Lavoro 100% parte alta, zero impatto sugli arti inferiori."}, {"id": "d2_w2", "name": "Mobilità Scapole", "alt": "2 min aperture con elastico leggero o bastone", "icon": "mobility", "setsCount": 1, "setsLabel": "2 min", "restSec": 0, "rangeLabel": "Mobilità articolare", "defaultKg": "", "isBodyweight": true, "desc": "Aperture frontali e circonduzioni con elastico leggero o bastone per attivare i retrattori scapolari.", "tendonNote": "Eseguibile comodamente da seduto."}]}, {"id": "main", "title": "2. Parte Centrale – Forza e Ipertrofia", "duration": "40 min", "badgeColor": "sky", "exercises": [{"id": "d2_m1", "name": "Lat Machine Avanti", "alt": "Impugnatura larga", "icon": "lat_pulldown", "setsCount": 4, "setsLabel": "4 × 8", "restSec": 90, "rangeLabel": "50–65 kg", "defaultKg": "55", "desc": "Seduto con ginocchia bloccate sotto i cuscinetti. Tira la sbarra verso la parte alta del petto avvicinando le scapole.", "tendonNote": "Ginocchia bloccate, caviglie e tendini completamente rilassati."}, {"id": "d2_m2", "name": "Pulley Basso", "alt": "Presa stretta triangolo", "icon": "seated_row", "setsCount": 3, "setsLabel": "3 × 10", "restSec": 90, "rangeLabel": "45–60 kg", "defaultKg": "50", "desc": "Seduto con ginocchia leggermente piegate, schiena dritta. Tira il triangolo verso l'ombelico tenendo i gomiti stretti.", "tendonNote": "Punta sulla pedana esclusivamente i talloni, senza spingere con l'avampiede."}, {"id": "d2_m3", "name": "Low Row Machine", "alt": "oppure Rematore Manubrio su panca", "icon": "low_row", "setsCount": 3, "setsLabel": "3 × 10", "restSec": 60, "rangeLabel": "45–60 kg (manubrio: 18–24 kg)", "defaultKg": "50", "desc": "Petto appoggiato al cuscinetto frontale della macchina. Tira le leve verso di te contraendo il centro della schiena.", "tendonNote": "Appoggio toracico frontale: zero carico su piedi e caviglie."}, {"id": "d2_m4", "name": "Rear Delt Machine", "alt": "oppure Face Pull al cavo", "icon": "rear_delt", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 60, "rangeLabel": "25–35 kg (face pull: 15–20 kg)", "defaultKg": "25", "desc": "Seduto al contrario sulla Pectoral Machine, petto contro lo schienale. Apri le braccia all'indietro parallele a terra.", "tendonNote": "Esecuzione da seduto con busto stabilizzato."}, {"id": "d2_m5", "name": "Curl con Manubri su Panca Inclinata", "alt": "Panca a 45°–60° (peso singolo)", "icon": "incline_curl", "setsCount": 3, "setsLabel": "3 × 10", "restSec": 90, "rangeLabel": "10–14 kg a manubrio", "defaultKg": "12", "desc": "Seduto su panca a 45°-60°, braccia distese. Piega i gomiti portando i manubri verso le spalle senza muovere i gomiti.", "tendonNote": "Completamente seduto e appoggiato allo schienale."}, {"id": "d2_m6", "name": "Curl al Cavo Basso o Curl Concentrato", "alt": "Isolamento bicipiti", "icon": "conc_curl", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 60, "rangeLabel": "15–25 kg (concentrato: 10–14 kg)", "defaultKg": "12", "desc": "Seduto su panca con gomito poggiato all'interno della coscia (o al cavo basso), solleva isolando il bicipite.", "tendonNote": "Preferisci la variante concentrata da seduto su panca."}]}, {"id": "core", "title": "3. Core a Terra", "duration": "10 min", "badgeColor": "emerald", "exercises": [{"id": "d2_c1", "name": "Crunch Inverso su panca o tappetino", "alt": "Addome inferiore", "icon": "reverse_crunch", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 30, "rangeLabel": "Corpo libero (0 kg)", "defaultKg": "0", "desc": "Supino, mani lungo i fianchi. Porta le ginocchia al petto sollevando leggermente il bacino con controllo.", "tendonNote": "Piedi sollevati in scarico totale per tutta la serie."}, {"id": "d2_c2", "name": "Plank sulle Ginocchia (Modificato)", "alt": "Tenuta isometrica 30\"–45\"", "icon": "knee_plank", "setsCount": 3, "setsLabel": "3 × 30\"–45\"", "restSec": 30, "rangeLabel": "Corpo libero (0 kg)", "defaultKg": "0", "desc": "Appoggio su avambracci e ginocchia, corpo in linea retta dalla testa alle ginocchia, addome e glutei contratti.", "tendonNote": "NON puntare le punte dei piedi a terra: tieni i piedi sollevati o rilassati."}]}]}, "3": {"title": "Giorno 3: Richiamo & Braccia", "subtitle": "Upper Body Completo + Braccia & Core • ~60 min", "sections": [{"id": "warmup", "title": "1. Riscaldamento", "duration": "10 min", "badgeColor": "amber", "exercises": [{"id": "d3_w1", "name": "Recline Bike (Cyclette con schienale)", "alt": "8 min a ritmo costante", "icon": "recline_bike", "setsCount": 1, "setsLabel": "8 min", "restSec": 0, "rangeLabel": "Cardio scarico", "defaultKg": "", "isBodyweight": true, "desc": "Pedalata fluida e costante mantenendo la schiena ben appoggiata allo schienale.", "tendonNote": "Pedala appoggiando l'arco plantare o il tallone per non sollecitare il tendine d'Achille."}, {"id": "d3_w2", "name": "Mobilità Articolare da seduto", "alt": "2 min rotazioni spalle e tronco", "icon": "mobility", "setsCount": 1, "setsLabel": "2 min", "restSec": 0, "rangeLabel": "Mobilità articolare", "defaultKg": "", "isBodyweight": true, "desc": "Rotazioni controllate del busto da seduto e circonduzioni di spalle e gomiti.", "tendonNote": "Eseguito interamente da seduto."}]}, {"id": "main", "title": "2. Parte Centrale – Spinta, Tirata & Braccia", "duration": "40 min", "badgeColor": "sky", "exercises": [{"id": "d3_m1", "name": "Chest Press Convergente", "alt": "Macchina guidata", "icon": "chest_press", "setsCount": 4, "setsLabel": "4 × 10", "restSec": 75, "rangeLabel": "45–60 kg", "defaultKg": "50", "desc": "Seduto con schiena aderente allo schienale, impugna all'altezza del petto e spingi in avanti distendendo le braccia.", "tendonNote": "Usa il poggiapiedi della macchina per scaricare i tendini."}, {"id": "d3_m2", "name": "Lat Machine con Presa Inversa (Supina)", "alt": "Palmi rivolti verso di te", "icon": "supine_lat", "setsCount": 4, "setsLabel": "4 × 10", "restSec": 75, "rangeLabel": "50–65 kg", "defaultKg": "55", "desc": "Seduto, impugna la sbarra alla larghezza spalle con palmi verso di te. Tira allo sterno lavorando dorsali e bicipiti.", "tendonNote": "Ginocchia bloccate sotto i rulli, caviglie rilassate."}, {"id": "d3_m3", "name": "Croci ai Cavi Alti da seduto", "alt": "Panca al centro dei cavi", "icon": "cable_fly", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 60, "rangeLabel": "10–15 kg per lato", "defaultKg": "12.5", "desc": "Posiziona una panca al centro dei cavi. Seduto con schiena dritta, chiudi le braccia davanti al petto ad arco ampio.", "tendonNote": "Esecuzione da seduto: stabilità totale senza sforzo sui piedi."}, {"id": "d3_m4", "name": "Alzate Frontali con Manubri da seduto", "alt": "Alternate (peso singolo)", "icon": "front_raise", "setsCount": 3, "setsLabel": "3 × 12", "restSec": 60, "rangeLabel": "8–10 kg a manubrio", "defaultKg": "8", "desc": "Seduto con schienale verticale, solleva un manubrio alla volta davanti a te fino all'altezza degli occhi.", "tendonNote": "Seduto con schiena supportata."}, {"id": "d3_m5", "name": "French Press con Manubri su Panca Piana", "alt": "Tricipiti (peso singolo)", "icon": "french_press", "setsCount": 3, "setsLabel": "3 × 10", "restSec": 75, "rangeLabel": "10–14 kg a manubrio", "defaultKg": "12", "desc": "Supino su panca piana, braccia tese in alto. Piega solo i gomiti portando i manubri ai lati della testa, poi ridistendi.", "tendonNote": "Sdraiato supino: piedi rilassati a terra o appoggiati sulla panca."}, {"id": "d3_m6", "name": "Hammer Curl (Presa a Martello) da seduto", "alt": "Bicipiti e brachiale (peso singolo)", "icon": "hammer_curl", "setsCount": 3, "setsLabel": "3 × 10", "restSec": 75, "rangeLabel": "12–16 kg a manubrio", "defaultKg": "14", "desc": "Seduto su panca, palmi rivolti l'uno verso l'altro (presa neutra), solleva i manubri alternando le braccia.", "tendonNote": "Completamente seduto su panca."}]}, {"id": "core", "title": "3. Core & Lombari a Terra", "duration": "10 min", "badgeColor": "emerald", "exercises": [{"id": "d3_c1", "name": "Russian Twist", "alt": "Rotazioni busto obliqui", "icon": "russian_twist", "setsCount": 3, "setsLabel": "3 × 20 tot", "restSec": 45, "rangeLabel": "0–5 kg (disco opzionale)", "defaultKg": "0", "desc": "Seduto a terra, busto leggermente inclinato indietro. Ruota il busto a destra e sinistra toccando ai lati.", "tendonNote": "Appoggia i talloni a terra per sicurezza ed equilibrio."}, {"id": "d3_c2", "name": "Barchetta Lombari (Superman Hold)", "alt": "Catena posteriore a terra", "icon": "superman", "setsCount": 3, "setsLabel": "3 × 12 / 20\"", "restSec": 30, "rangeLabel": "Corpo libero (0 kg)", "defaultKg": "0", "desc": "A pancia in giù, solleva contemporaneamente petto e braccia di pochi centimetri stringendo i dorsali.", "tendonNote": "Collo dei piedi completamente rilassato a terra, senza forzare le caviglie."}]}]}};
+    const STORAGE_KEY = "mirko_workout_app_v1";
+    let appState = { activeDay: 1, weights: {}, completedSets: {} };
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          appState = { activeDay: parsed.activeDay || 1, weights: parsed.weights || {}, completedSets: parsed.completedSets || {} };
+        }
+      } catch (e) {}
+    }
+    function saveState() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(appState)); } catch (e) {}
+    }
+
+    let audioCtx = null;
+    function playTimerBeep() {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+        const now = audioCtx.currentTime;
+        [0, 0.22, 0.44].forEach((offset, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(idx === 2 ? 1046.5 : 880, now + offset);
+          gain.gain.setValueAtTime(0.001, now + offset);
+          gain.gain.exponentialRampToValueAtTime(0.35, now + offset + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + offset + 0.18);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + offset);
+          osc.stop(now + offset + 0.19);
+        });
+      } catch (e) {}
+    }
+
+    let timerState = { totalSec: 90, remainingSec: 90, running: false, intervalId: null, exerciseName: 'Tocca "Rec" su un esercizio' };
+    const elTimerDisplay = document.getElementById("timer-display");
+    const elTimerStatus = document.getElementById("timer-status");
+    const elTimerExName = document.getElementById("timer-exercise-name");
+    const elTimerProgress = document.getElementById("timer-progress");
+    const btnTimerToggle = document.getElementById("btn-timer-toggle");
+
+    function formatSeconds(sec) {
+      const s = Math.max(0, Math.floor(sec));
+      return `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+    }
+    function updateTimerUI() {
+      elTimerDisplay.textContent = formatSeconds(timerState.remainingSec);
+      elTimerExName.textContent = timerState.exerciseName;
+      const pct = timerState.totalSec > 0 ? Math.min(100, Math.max(0, (timerState.remainingSec / timerState.totalSec) * 100)) : 0;
+      elTimerProgress.style.width = `${pct}%`;
+      if (timerState.running) {
+        btnTimerToggle.textContent = "Pausa";
+        btnTimerToggle.className = "px-3.5 h-9 rounded-xl bg-slate-700 hover:bg-slate-600 active:scale-95 text-white font-extrabold text-xs uppercase tracking-wide transition";
+        elTimerStatus.textContent = "Recupero in corso...";
+        elTimerStatus.className = "text-[11px] font-bold uppercase tracking-wider text-amber-400";
+        elTimerDisplay.className = "text-2xl sm:text-3xl font-extrabold tabular-nums tracking-tight text-white";
+      } else {
+        btnTimerToggle.textContent = timerState.remainingSec === 0 ? "Riavvia" : "Avvia";
+        btnTimerToggle.className = "px-3.5 h-9 rounded-xl bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 font-extrabold text-xs uppercase tracking-wide shadow-md shadow-amber-500/20 transition";
+        if (timerState.remainingSec === 0) {
+          elTimerStatus.textContent = "Recupero Completato!";
+          elTimerStatus.className = "text-[11px] font-bold uppercase tracking-wider text-emerald-400";
+          elTimerDisplay.className = "text-2xl sm:text-3xl font-extrabold tabular-nums tracking-tight text-emerald-400";
+        } else {
+          elTimerStatus.textContent = "Timer Recupero";
+          elTimerStatus.className = "text-[11px] font-bold uppercase tracking-wider text-slate-400";
+          elTimerDisplay.className = "text-2xl sm:text-3xl font-extrabold tabular-nums tracking-tight text-white";
+        }
+      }
+    }
+    function stopTimerInterval() {
+      if (timerState.intervalId) { clearInterval(timerState.intervalId); timerState.intervalId = null; }
+      timerState.running = false;
+    }
+    function startTimer(seconds = null, exerciseName = null) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (AudioContext && !audioCtx) audioCtx = new AudioContext();
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+      } catch (e) {}
+      stopTimerInterval();
+      if (seconds !== null) { timerState.totalSec = seconds; timerState.remainingSec = seconds; }
+      else if (timerState.remainingSec <= 0) { timerState.remainingSec = timerState.totalSec || 60; }
+      if (exerciseName) timerState.exerciseName = exerciseName;
+      timerState.running = true;
+      updateTimerUI();
+      timerState.intervalId = setInterval(() => {
+        if (timerState.remainingSec > 1) { timerState.remainingSec -= 1; updateTimerUI(); }
+        else {
+          timerState.remainingSec = 0; stopTimerInterval(); updateTimerUI(); playTimerBeep();
+          if (navigator.vibrate) navigator.vibrate([200, 100, 200]);
+          showToast("Recupero terminato! Pronti per la serie");
+        }
+      }, 1000);
+    }
+
+    btnTimerToggle.addEventListener("click", () => { if (timerState.running) { stopTimerInterval(); updateTimerUI(); } else { startTimer(); } });
+    document.getElementById("btn-timer-plus").addEventListener("click", () => { timerState.remainingSec += 15; if (timerState.remainingSec > timerState.totalSec) timerState.totalSec = timerState.remainingSec; updateTimerUI(); });
+    document.getElementById("btn-timer-minus").addEventListener("click", () => { timerState.remainingSec = Math.max(5, timerState.remainingSec - 15); updateTimerUI(); });
+    document.getElementById("btn-timer-reset").addEventListener("click", () => { stopTimerInterval(); timerState.remainingSec = timerState.totalSec; updateTimerUI(); });
+
+    let toastTimeout = null;
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toast-text").textContent = msg;
+      toast.classList.remove("opacity-0"); toast.classList.add("opacity-100");
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => { toast.classList.remove("opacity-100"); toast.classList.add("opacity-0"); }, 2200);
+    }
+
+    function updateDayProgress() {
+      const day = WORKOUT_DATA[appState.activeDay];
+      let totalSets = 0, doneSets = 0;
+      day.sections.forEach(sec => sec.exercises.forEach(ex => {
+        totalSets += ex.setsCount;
+        const arr = appState.completedSets[ex.id] || [];
+        for (let i = 0; i < ex.setsCount; i++) if (arr[i]) doneSets++;
+      }));
+      const pct = totalSets > 0 ? Math.round((doneSets / totalSets) * 100) : 0;
+      document.getElementById("progress-label").textContent = `${doneSets}/${totalSets} (${pct}%)`;
+      document.getElementById("progress-bar").style.width = `${pct}%`;
+    }
+
+    function renderDay(dayNum) {
+      appState.activeDay = dayNum; saveState();
+      document.querySelectorAll(".day-tab").forEach(btn => {
+        const isCurrent = Number(btn.dataset.day) === dayNum;
+        btn.className = isCurrent
+          ? "day-tab py-2 px-2 rounded-lg text-xs sm:text-sm font-extrabold transition text-center leading-tight bg-amber-500 text-slate-950 shadow-sm"
+          : "day-tab py-2 px-2 rounded-lg text-xs sm:text-sm font-bold transition text-center leading-tight text-slate-400 hover:text-white hover:bg-slate-800/60";
+      });
+      const dayData = WORKOUT_DATA[dayNum];
+      document.getElementById("day-subtitle").textContent = dayData.subtitle;
+      const container = document.getElementById("workout-container");
+      container.innerHTML = "";
+      const badgeStyles = {
+        amber: "bg-amber-500/15 text-amber-400 border-amber-500/30",
+        sky: "bg-sky-500/15 text-sky-400 border-sky-500/30",
+        emerald: "bg-emerald-500/15 text-emerald-400 border-emerald-500/30"
+      };
+      dayData.sections.forEach(section => {
+        const sectionEl = document.createElement("section");
+        sectionEl.className = "space-y-3";
+        sectionEl.innerHTML = `<div class="flex items-center justify-between pt-1"><h2 class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-slate-200">${section.title}</h2><span class="text-xs font-bold px-2.5 py-0.5 rounded-full border ${badgeStyles[section.badgeColor] || badgeStyles.amber}">${section.duration}</span></div>`;
+        const cardsWrapper = document.createElement("div");
+        cardsWrapper.className = "space-y-3";
+        section.exercises.forEach(ex => {
+          const savedWeight = appState.weights[ex.id] !== undefined ? appState.weights[ex.id] : ex.defaultKg;
+          const completedArr = appState.completedSets[ex.id] || [];
+          const allDone = Array.from({ length: ex.setsCount }, (_, i) => !!completedArr[i]).every(Boolean);
+          const card = document.createElement("article");
+          card.id = `card-${ex.id}`;
+          card.className = `rounded-2xl border transition-all duration-200 overflow-hidden ${allDone ? "bg-slate-900/60 border-emerald-500/40" : "bg-slate-900 border-slate-800 shadow-lg shadow-black/20"}`;
+          let setsHtml = "";
+          for (let i = 0; i < ex.setsCount; i++) {
+            const checked = !!completedArr[i];
+            const label = ex.setsCount === 1 ? "Fatto" : `S${i + 1}`;
+            setsHtml += `<button type="button" data-ex="${ex.id}" data-set="${i}" data-rest="${ex.restSec}" data-name="${ex.name.replace(/"/g, '&quot;')}" class="set-btn flex-1 min-w-[54px] h-10 rounded-xl font-extrabold text-xs flex items-center justify-center gap-1 border transition active:scale-95 ${checked ? "bg-emerald-500 text-slate-950 border-emerald-400 shadow-sm shadow-emerald-500/25" : "bg-slate-850 text-slate-300 border-slate-700 hover:border-slate-500"}"><svg class="w-3.5 h-3.5 ${checked ? 'block' : 'hidden'}" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg><span>${label}</span></button>`;
+          }
+          const restBtnHtml = ex.restSec > 0 ? `<button type="button" data-rest="${ex.restSec}" data-name="${ex.name.replace(/"/g, '&quot;')}" class="rest-trigger-btn shrink-0 px-3 py-2 rounded-xl bg-amber-500/15 hover:bg-amber-500/25 active:scale-95 text-amber-300 border border-amber-500/30 font-extrabold text-xs flex items-center gap-1.5 transition"><svg class="w-3.5 h-3.5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg><span>Rec ${ex.restSec}"</span></button>` : "";
+          const weightInputHtml = !ex.isBodyweight ? `<div class="flex items-center gap-1.5 bg-slate-950 px-2.5 py-1.5 rounded-xl border border-slate-800 focus-within:border-amber-500/70"><label for="kg-${ex.id}" class="text-[11px] font-bold uppercase text-slate-400">Kg:</label><input id="kg-${ex.id}" data-ex="${ex.id}" type="number" inputmode="decimal" step="0.5" value="${savedWeight}" placeholder="0" class="kg-input w-14 bg-transparent text-right font-extrabold text-sm text-amber-400 focus:outline-none" /></div>` : "";
+          card.innerHTML = `<div class="p-3.5 sm:p-4"><div class="flex items-start gap-3"><div class="shrink-0 w-16 h-14 rounded-xl bg-slate-950 border border-slate-800 flex items-center justify-center p-1">${SVG_ICONS[ex.icon] || SVG_ICONS.mobility}</div><div class="flex-1 min-w-0"><div class="flex items-start justify-between gap-2"><h3 class="text-sm sm:text-base font-extrabold text-white leading-snug">${ex.name}</h3>${restBtnHtml}</div><p class="text-xs text-slate-400 mt-0.5">${ex.alt}</p><div class="flex flex-wrap items-center gap-2 mt-2"><span class="inline-flex items-center px-2 py-0.5 rounded-md bg-slate-800 text-slate-200 font-bold text-xs">${ex.setsLabel}</span><span class="inline-flex items-center px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-300 border border-amber-500/20 font-semibold text-xs">${ex.rangeLabel}</span></div></div></div><div class="mt-3.5 pt-3 border-t border-slate-800/80 flex flex-wrap items-center justify-between gap-2.5"><div class="flex items-center gap-1.5 flex-1 min-w-[200px]">${setsHtml}</div>${weightInputHtml}</div><div class="mt-2.5"><button type="button" data-target="desc-${ex.id}" class="toggle-desc-btn w-full flex items-center justify-between text-left py-1 text-xs font-semibold text-slate-400 hover:text-slate-200 transition"><span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span><span>Come si esegue &amp; nota tendine</span></span><svg class="w-4 h-4 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg></button><div id="desc-${ex.id}" class="mt-1.5 p-3 rounded-xl bg-slate-950/90 border border-slate-800/90 text-xs leading-relaxed space-y-1.5"><p class="text-slate-300">${ex.desc}</p><p class="text-emerald-300 font-medium flex items-start gap-1.5"><span class="shrink-0">🛡️</span><span><strong>Tendine:</strong> ${ex.tendonNote}</span></p></div></div></div>`;
+          cardsWrapper.appendChild(card);
+        });
+        sectionEl.appendChild(cardsWrapper);
+        container.appendChild(sectionEl);
+      });
+      attachCardListeners();
+      updateDayProgress();
+    }
+
+    function attachCardListeners() {
+      document.querySelectorAll(".set-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const exId = btn.dataset.ex, setIdx = Number(btn.dataset.set), restSec = Number(btn.dataset.rest), exName = btn.dataset.name;
+          if (!appState.completedSets[exId]) appState.completedSets[exId] = [];
+          const newState = !appState.completedSets[exId][setIdx];
+          appState.completedSets[exId][setIdx] = newState;
+          saveState(); renderDay(appState.activeDay);
+          if (newState && restSec > 0 && !timerState.running) {
+            timerState.totalSec = restSec; timerState.remainingSec = restSec; timerState.exerciseName = exName; updateTimerUI();
+          }
+        });
+      });
+      document.querySelectorAll(".kg-input").forEach(input => {
+        input.addEventListener("input", () => { appState.weights[input.dataset.ex] = input.value; saveState(); });
+        input.addEventListener("change", () => { showToast(`Peso salvato: ${input.value || 0} kg`); });
+      });
+      document.querySelectorAll(".rest-trigger-btn").forEach(btn => {
+        btn.addEventListener("click", () => { startTimer(Number(btn.dataset.rest), btn.dataset.name); });
+      });
+      document.querySelectorAll(".toggle-desc-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          const target = document.getElementById(btn.dataset.target);
+          const arrow = btn.querySelector("svg");
+          if (target) { target.classList.toggle("hidden"); if (arrow) arrow.classList.toggle("rotate-180"); }
+        });
+      });
+    }
+
+    document.querySelectorAll(".day-tab").forEach(btn => {
+      btn.addEventListener("click", () => { renderDay(Number(btn.dataset.day)); window.scrollTo({ top: 0, behavior: "smooth" }); });
+    });
+    const adviceModal = document.getElementById("advice-modal");
+    document.getElementById("btn-open-advice").addEventListener("click", () => { adviceModal.classList.remove("hidden"); adviceModal.classList.add("flex"); });
+    const closeAdvice = () => { adviceModal.classList.add("hidden"); adviceModal.classList.remove("flex"); };
+    document.getElementById("btn-close-advice").addEventListener("click", closeAdvice);
+    document.getElementById("btn-confirm-advice").addEventListener("click", closeAdvice);
+    adviceModal.addEventListener("click", (e) => { if (e.target === adviceModal) closeAdvice(); });
+
+    const resetModal = document.getElementById("reset-modal");
+    document.getElementById("btn-reset-sets").addEventListener("click", () => { resetModal.classList.remove("hidden"); resetModal.classList.add("flex"); });
+    const closeReset = () => { resetModal.classList.add("hidden"); resetModal.classList.remove("flex"); };
+    document.getElementById("btn-cancel-reset").addEventListener("click", closeReset);
+    resetModal.addEventListener("click", (e) => { if (e.target === resetModal) closeReset(); });
+    document.getElementById("btn-confirm-reset").addEventListener("click", () => {
+      const dayData = WORKOUT_DATA[appState.activeDay];
+      dayData.sections.forEach(sec => sec.exercises.forEach(ex => { delete appState.completedSets[ex.id]; }));
+      saveState(); closeReset(); renderDay(appState.activeDay); showToast("Serie azzerate! Carichi Kg mantenuti");
+    });
+
+    loadState(); renderDay(appState.activeDay); updateTimerUI();
+  </script>
+</body>
+</html>
